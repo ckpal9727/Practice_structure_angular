@@ -29,6 +29,12 @@
               <div><strong>City:</strong> {{ employee.address.city }}</div>
               <div><strong>Zipcode:</strong> {{ employee.address.zipcode }}</div>
             </td>
+            <td>
+              <button>
+                <a [routerLink]="['/employee', employee.id]">View</a>
+              </button>
+            </td>
+            
           </tr>
         </tbody>
       </table>

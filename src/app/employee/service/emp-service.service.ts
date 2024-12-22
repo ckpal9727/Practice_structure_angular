@@ -8,10 +8,25 @@ import { Employee } from '../model/emp-modal';
 })
 export class EmpServiceService {
 
-  url='http://localhost:3000/employees'
+  baseUrl='http://localhost:3000/employees'
   constructor(private httpClien:HttpClient) { }
 
   getAllEmp():Observable<Employee[]>{
-    return this.httpClien.get<Employee[]>(this.url);
+    return this.httpClien.get<Employee[]>(this.baseUrl);
+  }
+  getEmployeeById(id: number): Observable<Employee> {
+    return this.httpClien.get<Employee>(`${this.baseUrl}/${id}`);
+  }
+  addEmployee(employee: Employee):Observable<Employee>{
+    // return this.httpClien.post<Employee>(this.url)
+    return this.httpClien.post<Employee>(`${this.baseUrl}`, employee);
+  }
+
+  updateEmployee(employee: Employee):Observable<Employee>{
+    // return this.httpClien.post<Employee>(this.url)
+    return this.httpClien.put<Employee>(`${this.baseUrl}/${employee.id}`, employee);
+  }
+  deleteEmployee(id:number):Observable<void>{
+    return this.httpClien.delete<void>(`${this.baseUrl}/${id}`)
   }
 }
